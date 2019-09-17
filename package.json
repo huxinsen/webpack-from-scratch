@@ -4,7 +4,9 @@
   "description": "configure webpack from scratch",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev:build": "webpack --env.development --config ./build/webpack.base.js",
+    "dev": "webpack-dev-server --env.development --config ./build/webpack.base.js",
+    "build": "webpack --env.production --config ./build/webpack.base.js"
   },
   "keywords": [
     "webpack"
@@ -12,7 +14,11 @@
   "author": "huxinsen",
   "license": "MIT",
   "devDependencies": {
+    "clean-webpack-plugin": "^3.0.0",
+    "html-webpack-plugin": "^3.2.0",
     "webpack": "^4.40.2",
-    "webpack-cli": "^3.3.8"
+    "webpack-cli": "^3.3.8",
+    "webpack-dev-server": "^3.8.1",
+    "webpack-merge": "^4.2.2"
   }
 }
