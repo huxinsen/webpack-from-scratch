@@ -2,3 +2,11 @@
 // 打包本模块，解析出浏览器可以识别的代码
 // npx：npm 5.2后支持，可以用来调用项目内部安装的模块，如：npx webpack
 import './index.css' // 引入 css
+
+// 获取打包 logo.png 后的路径
+import logo from './logo.png'
+console.log(logo)
+
+let img = document.createElement('img')
+img.src = logo
+document.body.appendChild(img)

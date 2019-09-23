@@ -4,7 +4,6 @@ const prod = require('./webpack.prod')
 const path = require('path')
 const merge = require('webpack-merge') // 合并配置文件
 const HtmlWebpackPlugin = require('html-webpack-plugin') // 自动生成 html 文件并且引入打包后的文件
-const { CleanWebpackPlugin } = require('clean-webpack-plugin') // 打包前清空目录
 const MiniCssExtractPlugin = require('mini-css-extract-plugin') // 把 css 提取到单独的文件，可以和 js 一同加载
 
 // 通过 --config 指定执行的配置文件，两种方案：
@@ -49,6 +48,24 @@ module.exports = env => {
         // 其他预处理器
         // .less：less, less-loader
         // .stylus：stylus, stylus-loader
+
+        // 图标的处理，file-loader 默认功能为拷贝
+        {
+          test: /\.(woff|ttf|eot)$/,
+          use: 'file-loader',
+        },
+        // 图片的处理，url-loader 可以转成 base64 （减少 http 请求）
+        {
+          test: /\.(jpe?g|png|gif|svg)$/i,
+          use: {
+            loader: 'url-loader',
+            options: {
+              // 大于100k的图片，会调用 file-loader
+              limit: 100 * 1024,
+              name: 'images/[contenthash].[ext]',
+            },
+          },
+        },
       ],
     },
     output: {
@@ -61,7 +78,6 @@ module.exports = env => {
         new MiniCssExtractPlugin({
           filename: 'styles/index.css',
         }),
-      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, '../public/index.html'),
         filename: 'index.html',
