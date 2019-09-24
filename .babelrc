@@ -8,7 +8,9 @@
         // babel-polyfill
         "corejs": 2
       }
-    ]
+    ],
+    "@babel/preset-react",
+    "@babel/preset-typescript"
   ],
   "plugins": [
     // 解析装饰器
