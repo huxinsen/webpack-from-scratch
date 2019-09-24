@@ -15,15 +15,11 @@ module.exports = env => {
 
   const base = {
     // __dirname：当前文件根目录
-    entry: path.resolve(__dirname, '../src/index.tsx'),
+    entry: path.resolve(__dirname, '../src/index.js'),
     module: {
       // 定义文件使用的 loader
       // loader 的执行顺序：默认从下往上，从右往左执行
       rules: [
-        {
-          test: /\.tsx?$/,
-          use: 'babel-loader',
-        },
         // 解析 js 文件，默认会调用 @babel/core，后者再调用 @babel/preset-env，把 es6 转化成 es5
         // .babelrc 配置文件：presets 调用顺序从下往上，plugins 从上往下
         {

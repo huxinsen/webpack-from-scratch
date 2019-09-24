@@ -9,8 +9,7 @@
         "corejs": 2
       }
     ],
-    "@babel/preset-react",
-    "@babel/preset-typescript"
+    "@babel/preset-react"
   ],
   "plugins": [
     // 解析装饰器
