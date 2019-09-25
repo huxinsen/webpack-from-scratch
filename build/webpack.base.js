@@ -4,7 +4,6 @@ const prod = require('./webpack.prod')
 const path = require('path')
 const merge = require('webpack-merge') // 合并配置文件
 const HtmlWebpackPlugin = require('html-webpack-plugin') // 自动生成 html 文件并且引入打包后的文件
-const { CleanWebpackPlugin } = require('clean-webpack-plugin') // 打包前清空目录
 
 // 通过 --config 指定执行的配置文件，两种方案：
 // 1) 默认引用 base，再传入模式
@@ -21,7 +20,6 @@ module.exports = env => {
       path: path.resolve(__dirname, '../dist'),
     },
     plugins: [
-      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, '../public/index.html'),
         filename: 'index.html',
