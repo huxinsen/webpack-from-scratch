@@ -4,7 +4,6 @@ const prod = require('./webpack.prod')
 const path = require('path')
 const merge = require('webpack-merge') // 合并配置文件
 const HtmlWebpackPlugin = require('html-webpack-plugin') // 自动生成 html 文件并且引入打包后的文件
-const { CleanWebpackPlugin } = require('clean-webpack-plugin') // 打包前清空目录
 const MiniCssExtractPlugin = require('mini-css-extract-plugin') // 把 css 提取到单独的文件，可以和 js 一同加载
 
 // 通过 --config 指定执行的配置文件，两种方案：
@@ -23,7 +22,7 @@ module.exports = env => {
       rules: [
         // 匹配 .css：css-loader, style-loader
         {
-          test: /\.css/,
+          test: /\.css$/,
           // css-loader 解析css语法，将解析结果传递给 style-loader
           // style-loader 将解析的 css 变成 style 标签插入到页面中
           use: [
@@ -43,7 +42,7 @@ module.exports = env => {
         },
         // 匹配 .scss：node-sass, sass-loader
         {
-          test: /\.scss/,
+          test: /\.scss$/,
           use: ['style-loader', 'css-loader', 'sass-loader'],
         },
         // 其他预处理器
@@ -61,7 +60,6 @@ module.exports = env => {
         new MiniCssExtractPlugin({
           filename: 'styles/index.css',
         }),
-      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, '../public/index.html'),
         filename: 'index.html',
