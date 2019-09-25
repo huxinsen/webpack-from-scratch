@@ -1,21 +1,13 @@
 <template>
-  <div>
-    hello vue
-    <ul>
-      <li v-for="(todo, index) in todos" :key="index">{{todo}}</li>
-    </ul>
-  </div>
+  <div>{{msg}}</div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-
-@Component({
-  components: {
-    // todo...
+<script>
+export default {
+  data() {
+    return {
+      msg: 'hello vue',
+    }
   },
-})
-export default class Todo extends Vue {
-  public todos: string[] = ['香蕉', '苹果', '橘子']
 }
 </script>

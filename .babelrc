@@ -8,13 +8,6 @@
         // babel-polyfill
         "corejs": 2
       }
-    ],
-    [
-      "@babel/preset-typescript",
-      {
-        // Indicates that every file should be parsed as TS or TSX (depending on the isTSX option)
-        "allExtensions": true
-      }
     ]
   ],
   "plugins": [
