@@ -5,6 +5,7 @@ const path = require('path')
 const merge = require('webpack-merge') // 合并配置文件
 const HtmlWebpackPlugin = require('html-webpack-plugin') // 自动生成 html 文件并且引入打包后的文件
 const MiniCssExtractPlugin = require('mini-css-extract-plugin') // 把 css 提取到单独的文件，可以和 js 一同加载
+const VueLoaderPlugin = require('vue-loader/lib/plugin') // 将定义过的其它规则复制并应用到 .vue 文件里相应语言的块
 
 // 通过 --config 指定执行的配置文件，两种方案：
 // 1) 默认引用 base，再传入模式
@@ -15,11 +16,20 @@ module.exports = env => {
 
   const base = {
     // __dirname：当前文件根目录
-    entry: path.resolve(__dirname, '../src/index.js'),
+    entry: path.resolve(__dirname, '../src/index.ts'),
     module: {
       // 定义文件使用的 loader
       // loader 的执行顺序：默认从下往上，从右往左执行
       rules: [
+        // 匹配 .vue vue-loader (调用 vue-template-compiler )
+        {
+          test: /\.vue$/,
+          use: 'vue-loader',
+        },
+        {
+          test: /\.tsx?$/,
+          use: 'babel-loader',
+        },
         // 解析 js 文件，默认会调用 @babel/core，后者再调用 @babel/preset-env，把 es6 转化成 es5
         // .babelrc 配置文件：presets 调用顺序从下往上，plugins 从上往下
         {
@@ -28,7 +38,7 @@ module.exports = env => {
         },
         // 匹配 .css：css-loader, style-loader
         {
-          test: /\.css/,
+          test: /\.css$/,
           // css-loader 解析css语法，将解析结果传递给 style-loader
           // style-loader 将解析的 css 变成 style 标签插入到页面中
           use: [
@@ -48,7 +58,7 @@ module.exports = env => {
         },
         // 匹配 .scss：node-sass, sass-loader
         {
-          test: /\.scss/,
+          test: /\.scss$/,
           use: ['style-loader', 'css-loader', 'sass-loader'],
         },
         // 其他预处理器
@@ -84,6 +94,7 @@ module.exports = env => {
         new MiniCssExtractPlugin({
           filename: 'styles/index.css',
         }),
+      new VueLoaderPlugin(),
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, '../public/index.html'),
         filename: 'index.html',

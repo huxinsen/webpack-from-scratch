@@ -9,7 +9,13 @@
         "corejs": 2
       }
     ],
-    "@babel/preset-react"
+    [
+      "@babel/preset-typescript",
+      {
+        // Indicates that every file should be parsed as TS or TSX (depending on the isTSX option)
+        "allExtensions": true
+      }
+    ]
   ],
   "plugins": [
     // 解析装饰器
