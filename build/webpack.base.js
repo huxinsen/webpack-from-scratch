@@ -43,7 +43,11 @@ module.exports = env => {
         // 匹配 .scss：node-sass, sass-loader
         {
           test: /\.scss$/,
-          use: ['style-loader', 'css-loader', 'sass-loader'],
+          use: [
+            isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+            'css-loader',
+            'sass-loader',
+          ],
         },
         // 其他预处理器
         // .less：less, less-loader
