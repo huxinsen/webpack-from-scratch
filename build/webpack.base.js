@@ -32,7 +32,7 @@ module.exports = env => {
         },
         // 匹配 .css：css-loader, style-loader
         {
-          test: /\.css/,
+          test: /\.css$/,
           // css-loader 解析css语法，将解析结果传递给 style-loader
           // style-loader 将解析的 css 变成 style 标签插入到页面中
           use: [
@@ -52,7 +52,7 @@ module.exports = env => {
         },
         // 匹配 .scss：node-sass, sass-loader
         {
-          test: /\.scss/,
+          test: /\.scss$/,
           use: ['style-loader', 'css-loader', 'sass-loader'],
         },
         // 其他预处理器
