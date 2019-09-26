@@ -5,7 +5,7 @@
       {
         // 使用的 api 会自动转换，并且按需加载
         "useBuiltIns": "usage",
-        // babel-polyfill
+        // 替代了以前的 babel-polyfill
         "corejs": 2
       }
     ]
