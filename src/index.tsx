@@ -30,4 +30,11 @@ ReactDOM.render(<Counter num={1} />, document.getElementById('root'))
 
 // 使用 ts 的方案：
 // 1）ts-loader 配合 typescript 库
+// 生成ts的配置文件：npx tsc --init
+// 配置ts-loader：
+// {
+//   test:/\.tsx?$/,
+//   use: ['ts-loader'],
+//   exclude: /node_modules/
+// }
 // 2）babel7 @babel/preset-typescript（转换库）
